@@ -1,6 +1,6 @@
 # MyTableViewDemo
 Qt实现整行拖动表格
-    通过改写\r\n
+    通过改写
         -mousePressEvent
         -mouseMoveEvent
         -dragEnterEvent
