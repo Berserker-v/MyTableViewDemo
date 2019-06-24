@@ -26,10 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    mytableview.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    mytableview.h
 
 FORMS += \
         mainwindow.ui
