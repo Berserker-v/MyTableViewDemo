@@ -39,6 +39,24 @@
     </item>
    </layout>
   </widget>
+  <action name="addRow">
+   <property name="text">
+    <string>添加行</string>
+   </property>
+  </action>
+  <action name="delRow">
+   <property name="text">
+    <string>删除行</string>
+   </property>
+  </action>
+  <action name="clearTable">
+   <property name="text">
+    <string>清除</string>
+   </property>
+   <property name="toolTip">
+    <string>清空表格</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

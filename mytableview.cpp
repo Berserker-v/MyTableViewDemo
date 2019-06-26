@@ -18,16 +18,40 @@ MyTableView::MyTableView(QWidget *parent)
     mLabel->hide();
 
     mModel = nullptr;
+    mSelectModel = nullptr;
     mRowHeight = 30;
     mValidPress = false;
     mRowFrom = 0;
     mRowTo = 0;
 }
 
+void MyTableView::addRow()
+{
+    int curRow = mSelectModel->currentIndex().row();
+    mModel->insertRow(curRow+1);
+}
+
+void MyTableView::delRow()
+{
+    int curRow = mSelectModel->currentIndex().row();
+    mModel->removeRow(curRow);
+}
+
+void MyTableView::clearRow()
+{
+    mModel->removeRows(0,mModel->rowCount());
+}
+
 void MyTableView::SetModel(QStandardItemModel *model)
 {
     mModel = model;
     QTableView::setModel(model);
+}
+
+void MyTableView::SetSelectionModel(QItemSelectionModel *selectmodel)
+{
+    mSelectModel = selectmodel;
+    QTableView::setSelectionModel(selectmodel);
 }
 
 void MyTableView::mousePressEvent(QMouseEvent *event)
@@ -55,7 +79,7 @@ void MyTableView::mousePressEvent(QMouseEvent *event)
             mValidPress = false;
         }
     }
-
+    //将其与操作交给继承对象
     QTableView::mousePressEvent(event);
 }
 

@@ -26,20 +26,19 @@ void MainWindow::InitTable()
     MyTableView* t = ui->tableView;
 
     //设置各种属性
-//    t->horizontalHeader()->hide();	//隐藏列头(带列头的情况需要修改代码，重新计算高度偏移)
-    t->verticalHeader()->hide();	//隐藏行头
+    t->verticalHeader()->hide();                            //隐藏行头
     t->verticalHeader()->setDefaultSectionSize(30);         //默认列高度
     t->horizontalHeader()->setStretchLastSection(true);     //最后一列自适应宽度
     t->setEditTriggers(QTableView::DoubleClicked);          //双击编辑
     t->setSelectionBehavior(QTableView::SelectRows);		//一次选中整行
     t->setSelectionMode(QTableView::SingleSelection);       //单行选中
     t->setAlternatingRowColors(true);                       //行间隔色
-//    t->setFocusPolicy(Qt::NoFocus);                         //去掉item选中时虚线框
     t->setDragDropMode(QAbstractItemView::DropOnly);        //使能表格drop
 
     //添加数据
 //    QStandardItemModel *model = new QStandardItemModel(3,2,this);
-    QStandardItemModel* model = new QStandardItemModel();
+    QStandardItemModel *model = new QStandardItemModel();
+    QItemSelectionModel *selectmodel = new QItemSelectionModel(model);
 
     t->horizontalHeader()->setMinimumHeight(30);
 
@@ -58,7 +57,11 @@ void MainWindow::InitTable()
         model->item(i, 0)->setTextAlignment(Qt::AlignCenter);
     }
     t->SetModel(model);
-
+    t->SetSelectionModel(selectmodel);
+    //添加右键菜单
+    QList<QAction*> actions;
+    actions << ui->addRow << ui->delRow << ui->clearTable;
+    addRightMenu(ui->tableView, actions);
     //设置样式
     t->setStyleSheet("QTableView {border: 1px solid gray;background: #E8E8E8;}\
                       QTableView::item{color:black;}\
@@ -67,3 +70,43 @@ void MainWindow::InitTable()
     t->setColumnWidth(0,80);
 //    t->selectRow(0);
 }
+
+void MainWindow::addRightMenu(MyTableView *table, const QList<QAction*> &actions)
+{
+    table->setContextMenuPolicy(Qt::ActionsContextMenu);
+    table->addActions(actions);
+}
+
+void MainWindow::on_addRow_triggered()
+{
+    ui->tableView->addRow();
+}
+
+void MainWindow::on_delRow_triggered()
+{
+    ui->tableView->delRow();
+}
+
+void MainWindow::on_clearTable_triggered()
+{
+    ui->tableView->clearRow();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

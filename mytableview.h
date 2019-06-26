@@ -16,6 +16,11 @@ public:
     MyTableView(QWidget *parent = Q_NULLPTR);
 
     void SetModel(QStandardItemModel *model);
+    void SetSelectionModel(QItemSelectionModel *selectmodel);
+    void addRow();
+    void addRow(const QList<QStandardItem*> &items);            //未启用
+    void delRow();
+    void clearRow();
 
 signals:
     void sigRowChange(int from, int to);
@@ -36,7 +41,8 @@ private:
     int  SumOffset();                   //计算像素补偿：用于解决当顶部未显示一整行时候产生的像素偏差
 
 private:
-    QStandardItemModel *mModel;
+    QStandardItemModel  *mModel;
+    QItemSelectionModel *mSelectModel;
     QLabel *mLabel;                     //指示线
     int mRowHeight;                     //行高
 
