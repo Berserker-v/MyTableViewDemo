@@ -1,6 +1,6 @@
 # MyTableViewDemo
 
-Ver 1.1 Data 2019.06.26  
+Ver 1.2 Data 2019.06.26  
 -添加增加行、删除行和清空表格方法
 
 Ver 1.1 Data 2019.06.24  
